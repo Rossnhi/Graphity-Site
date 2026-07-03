@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphity | Animate Mathematics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div id="tabs">
+            <a class="tab" href="#examples">Examples</a>
+            <a class="tab" href="#get-started">Get Started</a>
+            <a class="tab" href="#documentation">Documentation</a>
+            <a class="tab" href="#playground">Playground</a>
+            <a class="tab" href="https://github.com/Rossnhi/GraphityJS" target="_blank" class="github-tab">GitHub</a>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div id="hero-canvas-container"></div>
+        <div id="hero-content">
+            <div id="logo">Graphity</div>
+            <h1>Animate Mathematics</h1>
+            <p>A JavaScript library for beautiful interactive mathematical visualizations</p>
+            <div class="hero-buttons">
+                <button onclick="document.getElementById('get-started').scrollIntoView({behavior: 'smooth'})">Get Started</button>
+                <a href="graphity.js" download>
+                    <button>Download</button>
+                </a>
+                <a href="https://github.com/Rossnhi/GraphityJS" target="_blank"><button>GitHub</button></a>
+            </div>
+        </div>
+    </header>
+    <main id="content">
+        <div id="examples">
+            <div id="examples-list"></div>
+        </div>
+
+        <section id="get-started" class="section-block">
+            <div class="section-title">Get Started</div>
+            <p class="section-subtitle">Graphity is a plain script — no build step, no bundler. Drop it in a page alongside p5.js and you have a Cartesian plane to draw on.</p>
+
+            <div class="install-steps">
+                <div class="install-step">
+                    <div class="install-step-index">01</div>
+                    <div class="install-step-body">
+                        <p>Include p5.js, then graphity.js, in that order.</p>
+                        <div class="snippet"><pre><code class="language-none">&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"&gt;&lt;/script&gt;
+&lt;script src="graphity.js"&gt;&lt;/script&gt;</code></pre></div>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <div class="install-step-index">02</div>
+                    <div class="install-step-body">
+                        <p>Give it a container element to live in.</p>
+                        <div class="snippet"><pre><code class="language-none">&lt;div id="graph"&gt;&lt;/div&gt;</code></pre></div>
+                    </div>
+                </div>
+                <div class="install-step">
+                    <div class="install-step-index">03</div>
+                    <div class="install-step-body">
+                        <p>Create a Graphity instance, plot something in <code>setup</code>, animate it in <code>draw</code>.</p>
+                        <div class="snippet"><pre><code class="language-javascript">let gr = new Graphity({
+    parent: "graph",
+    canvasSize: [600, 600],
+    rangeX: [-4, 4],
+    rangeY: [-4, 4]
+});
+
+gr.setup(() => {
+    let plot = gr.addPlot((x) => x ** 2);
+    plot.color = gr.sketch.color(235, 195, 52);
+});
+
+gr.draw(() => {
+    // runs every frame
+});</code></pre></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="documentation" class="section-block">
+            <div class="section-title">Documentation</div>
+            <p class="section-subtitle">The core surface area — enough to plot, animate, and make things draggable. Pick something on the left to see it explained and running.</p>
+
+            <div class="doc-layout">
+                <nav id="doc-sidebar" class="doc-sidebar"></nav>
+                <div id="doc-content" class="doc-content"></div>
+            </div>
+        </section>
+
+        <section id="playground" class="section-block">
+            <div class="section-title">Playground</div>
+            <p class="section-subtitle">Nothing hidden here — the whole instance, setup, and draw loop are yours. Edit and click away (or hit Run) to see it live.</p>
+
+            <div class="playground-layout">
+                <div class="playground-editor">
+                    <pre class="code-block code-editable playground-code-block"><code id="playground-code" class="language-javascript" contenteditable="true" spellcheck="false"></code></pre>
+                    <div class="code-error" id="playground-error"></div>
+                    <button id="playground-run" class="playground-run">Run</button>
+                </div>
+                <div class="playground-canvas" id="playground-canvas"></div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Every animation you see on this website is made using graphity.</p>
+        <span id="copyright">Copyright (c) 2023 S Roshini</span>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="graphity.js"></script>
+    <script src="hero.js"></script>
+    <script src="graphity-runtime.js"></script>
+    <script src="examples.js"></script>
+    <script src="documentation.js"></script>
+    <script src="playground.js"></script>
+    <script src="cleanup.js"></script>
+</body>
+</html>
