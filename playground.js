@@ -94,6 +94,9 @@ function renderPlayground() {
             if (e.key === "Tab") {
                 e.preventDefault();
                 document.execCommand("insertText", false, "    ");
+            } else if (e.key === "Enter") {
+                e.preventDefault();
+                document.execCommand("insertText", false, "\n");
             }
         });
 

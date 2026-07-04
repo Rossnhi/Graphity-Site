@@ -25,7 +25,7 @@ const exampleConfigs = [
         title: "Plot",
         size: [400, 400],
         preamble:
-`const container = document.getElementById(containerId);
+            `const container = document.getElementById(containerId);
 const width = container.clientWidth;
 const height = container.clientHeight;
 
@@ -42,7 +42,7 @@ let scene = {
     point: null
 };`,
         code:
-`gr.setup(() => {
+            `gr.setup(() => {
     scene.plot = gr.addPlot((x) => Math.sin(4 * x));
     scene.plot.color = gr.sketch.color(235, 195, 52);
     scene.plot.animation.animate = true;
@@ -60,7 +60,7 @@ gr.draw(() => {
         title: "Animate",
         size: [450, 350],
         preamble:
-`const container = document.getElementById(containerId);
+            `const container = document.getElementById(containerId);
 const width = container.clientWidth;
 const height = container.clientHeight;
 
@@ -76,7 +76,7 @@ let scene = {
     plot: null
 };`,
         code:
-`gr.setup(() => {
+            `gr.setup(() => {
     scene.plot = gr.addPlot((x) => {
         return ((Math.abs(x) ** (2 / 3)) + (((3.3 - (x ** 2)) ** 0.5) * Math.sin(scene.plot.data[0] * Math.PI * x)));
     });
@@ -93,7 +93,7 @@ gr.draw(() => {
         title: "Zoom and Pan",
         size: [600, 600],
         preamble:
-`const container = document.getElementById(containerId);
+            `const container = document.getElementById(containerId);
 const width = container.clientWidth;
 const height = container.clientHeight;
 
@@ -105,7 +105,7 @@ let gr = new Graphity({
 });
 graphities.push(gr);`,
         code:
-`gr.setup(() => {
+            `gr.setup(() => {
     gr.colorPalette = {
         background: gr.sketch.color(120, 150, 80),
         axis: 30,
@@ -138,7 +138,7 @@ gr.draw(() => {
         title: "Transform",
         size: [500, 300],
         preamble:
-`const container = document.getElementById(containerId);
+            `const container = document.getElementById(containerId);
 const width = container.clientWidth;
 const height = container.clientHeight;
 
@@ -152,7 +152,7 @@ graphities.push(gr);
 
 let gridPoints = [];`,
         code:
-`gr.setup(() => {
+            `gr.setup(() => {
     for (let i = -5; i <= 5; i += 0.125) {
         for (let j = -3; j <= 3; j += 0.1) {
             let pt = gr.addPoint([i, j]);
@@ -189,7 +189,7 @@ gr.draw(() => {
         title: "Interact",
         size: [420, 420],
         preamble:
-`const container = document.getElementById(containerId);
+            `const container = document.getElementById(containerId);
 const width = container.clientWidth;
 const height = container.clientHeight;
 
@@ -201,7 +201,9 @@ let gr = new Graphity({
 });
 graphities.push(gr);`,
         code:
-`gr.setup(() => {
+            `let plot;
+let point;
+gr.setup(() => {
     let thomae = gr.addPlot((x) => {
         if (Calculus.isRational(x)) {
             let frac = Calculus.fraction(x);
@@ -214,14 +216,17 @@ graphities.push(gr);`,
     thomae.color = gr.sketch.color(235, 195, 52);
     thomae.analysisMode = true;
 
-    let point = gr.addPoint([1, 1]);
+    point = gr.addPoint([1, 1]);
     point.color = gr.sketch.color(35, 195, 255);
     point.style = "arrow";
     point.moveWithMouse = true;
+    plot = gr.addParametricPlot([0, 2 * Math.PI], (t) => [plot.data[0] * Math.cos(t), plot.data[0] * Math.sin(t)])
+    plot.data.push(point.point.mag)
+    plot.color = gr.sketch.color(200, 255, 50)
 });
 
 gr.draw(() => {
-
+    plot.data[0] = point.point.mag
 });`
     }
 ];
@@ -335,6 +340,9 @@ function renderExamples() {
                 if (e.key === "Tab") {
                     e.preventDefault();
                     document.execCommand("insertText", false, "    ");
+                } else if (e.key === "Enter") {
+                    e.preventDefault();
+                    document.execCommand("insertText", false, "\n");
                 }
             });
 
